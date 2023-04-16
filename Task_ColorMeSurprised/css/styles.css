@@ -1,0 +1,14 @@
+.color{
+	
+	width: 25vw;
+	background-color: grey;
+	display: inline-block;
+	padding: 2rem;
+	color: white;
+}
+
+html, body{
+	
+	height: 100%;
+	
+}

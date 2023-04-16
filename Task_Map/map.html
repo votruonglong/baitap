@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrap {
+            width: 90vw;
+            position: relative;
+        }
+
+        #map {
+            width: 100%;
+            height: auto;
+        }
+
+        #hero {
+            position: absolute;
+            top: 80%;
+            left: 10%;
+            width: 10%;
+            height: auto;
+            transform: translate(-50%, -50%);
+        }
+
+        .hotspot1 {
+            position: absolute;
+            left: 350px;
+            top: 750px;
+            height: 150px;
+            width: 150px;
+            
+        }
+
+        .hotspot2 {
+            height: 150px;
+            width: 150px;
+            position: absolute;
+            left: 200px;
+            top: 100px;
+            
+        }
+        .hotspot3 {
+            height: 150px;
+            width: 150px;
+            position: absolute;
+            left: 700px;
+            top: 300px;
+            
+        }
+
+        .hotspot4 {
+            height: 150px;
+            width: 150px;
+            position: absolute;
+            left: 1300px;
+            top: 200px;
+            
+        }
+
+        .hotspot5 {
+            height: 150px;
+            width: 150px;
+            position: absolute;
+            left: 770px;
+            top: 650px;
+            
+        }
+
+        .hotspot6 {
+            height: 150px;
+            width: 150px;
+            position: absolute;
+            left: 1450px;
+            top: 1000px;
+            ;
+        }
+    </style>
+</head>
+
+<script src="jquery-3.6.3.js"></script>
+
+<body>
+
+    <div class="wrap">
+        <img src="map.png" id="map">
+        <img src="hero.png" id="hero">
+        <div class="hotspot1" id="hotspot1"></div> <!-- Hotspot 1 -->
+        <div class="hotspot2" id="hotspot2"></div>
+        <div class="hotspot3" id="hotspot3"></div>
+        <div class="hotspot4" id="hotspot4"></div>
+        <div class="hotspot5" id="hotspot5"></div>
+        <div class="hotspot6" id="hotspot6"></div>
+    </div>
+
+
+    <script>
+        document.getElementById("hotspot1").addEventListener("click", function () {
+            animateHeroToPosition(350, 750); // Vị trí của hotspot 1 (x, y)
+        });
+
+        document.getElementById("hotspot2").addEventListener("click", function () {
+            animateHeroToPosition(200, 100); // Vị trí của hotspot 2 (x, y)
+        });
+
+        document.getElementById("hotspot3").addEventListener("click", function () {
+            animateHeroToPosition(700, 300); // Vị trí của hotspot 3 (x, y)
+        });
+
+        document.getElementById("hotspot4").addEventListener("click", function () {
+            animateHeroToPosition(1300, 200); // Vị trí của hotspot 4 (x, y)
+        });
+
+        document.getElementById("hotspot5").addEventListener("click", function () {
+            animateHeroToPosition(770, 650); // Vị trí của hotspot 5 (x, y)
+        });
+
+        document.getElementById("hotspot6").addEventListener("click", function () {
+            animateHeroToPosition(1450, 1000); // Vị trí của hotspot 6 (x, y)
+        });
+
+        // Hàm thực hiện di chuyển nhân vật đến vị trí được chỉ định
+        function animateHeroToPosition(x, y) {
+            var hero = document.getElementById("hero");
+            hero.style.transition = "all 1s ease"; // Thiết lập hiệu ứng chuyển động trong 1 giây
+            hero.style.left = x + "px"; // Thiết lập tọa độ x mới
+            hero.style.top = y + "px"; // Thiết lập tọa độ y mới
+        }
+
+    </script>
+</body>
+
+</html>

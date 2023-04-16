@@ -1,0 +1,38 @@
+<!doctype html>
+  
+<html>
+    
+    <head>
+        <title>Color me surprised!</title>
+        <meta charset="utf-8">
+		<link href="css/styles.css" rel="stylesheet">
+    </head>
+   
+    <body>
+	
+		<div id="red" class="color">Red</div>
+		<div id="green" class="color">Green</div>
+		<div id="blue" class="color">Blue</div>
+		
+		 <script>
+            const red = document.getElementById('red');
+            const green = document.getElementById('green');
+            const blue = document.getElementById('blue');
+
+            red.addEventListener('mousemove', () => {
+                document.body.style.backgroundColor = 'red';
+            });
+
+            green.addEventListener('mousemove', () => {
+                document.body.style.backgroundColor = 'green';
+            });
+
+            blue.addEventListener('mousemove', () => {
+                document.body.style.backgroundColor = 'blue';
+            });
+            
+        </script>
+ 
+    </body>
+
+</html>

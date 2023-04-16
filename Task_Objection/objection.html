@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objection!</title>
+</head>
+
+<body>
+    <script src="jquery-3.6.3.js"></script>
+
+    <button id="listMovies">List All Movies</button>
+    <button id="sortByPrice">Sort by Price</button>
+    <button id="sortByYear">Sort by Year</button>
+    <input type="text" id="search">
+    <button id="searchByName">Search by Name</button>
+
+    <div id="movies">
+
+    </div>
+
+    <script>
+        const movieRentalShop = {
+            closed: false,
+            movies: [
+                {
+                    Name: "Forest Gump",
+                    Year: 1994,
+                    Cost: 4
+                },
+                {
+                    Name: "A Serious Man",
+                    Year: 2009,
+                    Cost: 3
+                },
+                {
+                    Name: "Napoleon Dynamite",
+                    Year: 2004,
+                    Cost: 5
+                },
+                {
+                    Name: "Adaptation",
+                    Year: 2002,
+                    Cost: 2
+                },
+                {
+                    Name: "Pi",
+                    Year: 1998,
+                    Cost: 1
+                },
+                {
+                    Name: "Eternal Sunshine of the Spotless Mind",
+                    Year: 2004,
+                    Cost: 4
+                }
+            ]
+        }
+
+        const movieList = document.getElementById("movies");
+        const btnListMovie = document.getElementById("listMovies");
+        const btnSortByPrice = document.getElementById("sortByPrice");
+        const btnSortByYear = document.getElementById("sortByYear");
+        const search = document.getElementById("search");
+        const btnSearchByName = document.getElementById("searchByName");
+
+        btnListMovie.addEventListener("click", () => {
+            let moviesHTML = movieRentalShop.movies.map(movie => `
+            <div>
+                <p>Name: ${movie.Name} </p>
+                <p>Year: ${movie.Year} </p>
+                <p>Cost: ${movie.Cost} </p>
+            </div>
+        `)
+            movieList.innerHTML = moviesHTML.join("");
+
+        });
+
+        btnSortByPrice.addEventListener("click", () => {
+            movieRentalShop.movies.sort((a, b) => {
+                return a.Cost - b.Cost;
+            });
+            btnListMovie.click(); // Refresh movie list after sorting
+        });
+
+        btnSortByYear.addEventListener("click", () => {
+            movieRentalShop.movies.sort((a, b) => {
+                return a.Year - b.Year;
+            });
+            btnListMovie.click();
+        })
+
+        btnSearchByName.addEventListener("click", () => {
+            const searchTerm = search.value.toLowerCase(); // Chuyển đổi giá trị của input search thành chữ thường
+            const filteredMovies = movieRentalShop.movies.filter(movie => movie.Name.toLowerCase().includes(searchTerm)); // Sử dụng filter để lọc phim dựa trên tên
+            const moviesHTML = filteredMovies.map(movie => `
+        <div>
+            <p>Name: ${movie.Name} </p>
+            <p>Year: ${movie.Year} </p>
+            <p>Cost: ${movie.Cost} </p>
+        </div>
+    `); // Tạo chuỗi HTML để hiển thị các phim lọc được
+            movieList.innerHTML = moviesHTML.join(""); // Gán chuỗi HTML vào div có id là movies
+        });
+
+    </script>
+
+
+</body>
+
+</html>

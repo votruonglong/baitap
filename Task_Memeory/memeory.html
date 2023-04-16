@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #gridContainer {
+
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr 1fr;
+            grid-gap: 0.1rem;
+            width: 40vw;
+            height: 40vw;
+        }
+
+        .cell {
+
+            background-color: darkslategray;
+            padding: 1rem;
+            background-size: cover;
+            background-position: center;
+
+        }
+
+        .cell.flipped {
+            opacity: 0.5;
+            /* Thay đổi độ mờ tùy ý */
+            pointer-events: none;
+            /* Ngăn không cho click vào ô đã khớp */
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="gridContainer">
+
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+
+
+    </div>
+
+
+    <script src="jquery-3.6.3.js"></script>
+
+    <script>
+
+        let imagesArray = [
+            'img/meme1.jpg',
+            'img/meme1.jpg',
+            'img/meme2.jpg',
+            'img/meme2.jpg',
+            'img/meme3.jpg',
+            'img/meme3.jpg',
+            'img/meme4.jpg',
+            'img/meme4.jpg',
+            'img/meme5.jpg',
+            'img/meme5.jpg',
+            'img/meme6.jpg',
+            'img/meme6.jpg',
+        ];
+
+
+        // Lấy tất cả các ô cell trong grid container
+        const cells = document.querySelectorAll('.cell');
+
+        let flippedCells = []; // Mảng lưu trữ các ô đã được lật
+        let matchedCells = []; // Mảng lưu trữ các ô đã khớp
+
+        // Hàm xáo trộn mảng hình ảnh
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Hàm lật ô
+        function flipCell(cell) {
+            cell.style.backgroundImage = `url(${cell.dataset.image})`;
+            cell.classList.add('flipped');
+        }
+
+        // Hàm đóng lại ô
+        function closeCell(cell) {
+            cell.style.backgroundImage = '';
+            cell.classList.remove('flipped');
+        }
+
+        // Hàm kiểm tra xem hai ô có khớp nhau hay không
+        function checkMatch() {
+            if (flippedCells.length === 2) {
+                const firstCell = flippedCells[0];
+                const secondCell = flippedCells[1];
+
+                if (firstCell.dataset.image === secondCell.dataset.image) {
+                    matchedCells.push(firstCell, secondCell);
+                    flippedCells = [];
+
+                    // Kiểm tra xem đã hoàn thành trò chơi hay chưa
+                    if (matchedCells.length === cells.length) {
+                        alert('Chúc mừng! Bạn đã hoàn thành trò chơi!');
+                    }
+                } else {
+                    setTimeout(() => {
+                        closeCell(firstCell);
+                        closeCell(secondCell);
+                        flippedCells = [];
+                    }, 1000);
+                }
+            }
+        }
+
+        // Lắng nghe sự kiện click trên các ô cell
+        cells.forEach(cell => {
+            cell.addEventListener('click', () => {
+                if (!cell.classList.contains('flipped') && flippedCells.length < 2) {
+                    flipCell(cell);
+                    flippedCells.push(cell);
+                    checkMatch();
+                }
+            });
+        });
+
+        // Xáo trộn mảng hình ảnh và gán cho các ô cell
+        const shuffledImages = shuffleArray(imagesArray);
+        cells.forEach((cell, index) => {
+            cell.dataset.image = shuffledImages[index];
+        });
+
+
+
+    </script>
+
+</body>
+
+</html>
